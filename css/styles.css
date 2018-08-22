@@ -1,12 +1,18 @@
-.game {
-  display: none;
-}
-
 .player, .turnDiv, .output, .tally {
   border: solid black 1px;
   border-radius: 15px;
   text-align: center;
   margin-top: 2%;
+}
+
+.tSquare {
+  border: solid black 1px;
+  text-align: center;
+  height: 150px;
+}
+
+div.col-md-4 {
+  padding: 0px;
 }
 
 .tally {

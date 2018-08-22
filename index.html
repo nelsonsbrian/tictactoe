@@ -5,11 +5,11 @@
   <link href="css/styles.css" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="js/scripts.js"></script>
-  <title>Pig Dice Game</title>
+  <title>Tic-Tac-Toe</title>
 </head>
 <body>
   <div class="container">
-    <h1>Pig Game</h1>
+    <h1>Tic-Tac-Toe</h1>
     <div id='intro'>
       <div class="form-group">
         <label for="player1">Player 1 Name</label>
@@ -23,18 +23,44 @@
     </div>
     <div class="game">
       <div class="row">
-        <div class="col-md-6">
-          <div class="player player1">
-            <h2 id='nameP1'></h2>
-            <h3>Score:</h3>
-            <p class="score" id="scoreP1"></p>
+        <div class="col-md-4">
+          <div id='1' class="tSquare">
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="player player2">
-            <h2 id='nameP2'></h2>
-            <h3>Score:</h3>
-            <p class="score" id="scoreP2"></p>
+        <div class="col-md-4">
+          <div id='2' class="tSquare">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div id='3' class="tSquare">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id='4' class="tSquare">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div id='5' class="tSquare">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div id='6' class="tSquare">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id='7' class="tSquare">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div id='8' class="tSquare">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div id='9' class="tSquare">
           </div>
         </div>
       </div>
@@ -43,18 +69,6 @@
         <div class="whoTurn">
 
         </div>
-      </div>
-      <div class="gameplay">
-
-        <button type="button" id='rollDice' name="button">Roll Dice</button>
-        <button type="button" id='holdGame'name="button">Hold Game</button>
-        <button type="button" id='playAgain' class="btn btn-danger" name="button">Reset</button>
-      </div>
-      <div class="output">
-        <h2>Roll History:</h2>
-      </div>
-      <div class="tally">
-
       </div>
     </div>
   </div>
