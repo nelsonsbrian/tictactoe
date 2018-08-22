@@ -1,39 +1,16 @@
-.player, .turnDiv, .output, .tally {
-  border: solid black 1px;
-  border-radius: 15px;
-  text-align: center;
-  margin-top: 2%;
-}
 
 .tSquare {
   border: solid black 1px;
   text-align: center;
   height: 150px;
+  font-weight: bold;
+  font-size: 100px;
 }
 
 div.col-md-4 {
   padding: 0px;
 }
 
-.tally {
-  height: 50px;
-  font-size: 40px;
-}
-
-.turnDiv {
-  font-size: 35px;
-}
-
-.score {
-  font-size: 40px;
-  font-weight: 700;
-}
-
-.whoTurn {
-  font-weight: 900;
-}
-
-.gameplay {
-  padding-left: 40%;
-  margin-top: 5%;
+h1 {
+  text-align: center;
 }
