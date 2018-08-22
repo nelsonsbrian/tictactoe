@@ -1,0 +1,33 @@
+.game {
+  display: none;
+}
+
+.player, .turnDiv, .output, .tally {
+  border: solid black 1px;
+  border-radius: 15px;
+  text-align: center;
+  margin-top: 2%;
+}
+
+.tally {
+  height: 50px;
+  font-size: 40px;
+}
+
+.turnDiv {
+  font-size: 35px;
+}
+
+.score {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.whoTurn {
+  font-weight: 900;
+}
+
+.gameplay {
+  padding-left: 40%;
+  margin-top: 5%;
+}
