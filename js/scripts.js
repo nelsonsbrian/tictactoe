@@ -28,7 +28,7 @@ var winningArrs = [
   ['-','-','M','-','M','-','M','-','-']
 ];
 
-var test = ['-','M','-','-','M','-','-','-','M'];
+
 
 var otherWin = [
   ['0','1','2'],
@@ -59,12 +59,18 @@ var findWin = function() {
   playerArr = output.split('');
   for(i=0;i<otherWin.length;i++) {
     if (playerArr.includes(otherWin[i][0]) && playerArr.includes(otherWin[i][1]) && playerArr.includes(otherWin[i][2])) {
-      console.log("winner:" + i);
+
       return true;
     }
   }
 }
 
+var isTied = function() {
+  var spacesRemaining = game.join('').match(/z/gi)||[].length;
+  if (spacesRemaining === 0) {
+    return true;
+  }
+}
 
 
 var Player = function (name, symbol, turn) {
@@ -106,14 +112,6 @@ var switchTurn = function() {
   }
 }
 
-// var gameSetup = function() {
-//   var newPlayer = new Player("Player 1", 'X', true);
-//   players.push(newPlayer);
-//   var newPlayer = new Player("Player 2", 'O', false);
-//   players.push(newPlayer);
-//   $('.pTurn').text(players[playerTurnIndex].name + " - " + players[playerTurnIndex].symbol)
-//
-// }
 
 var gameOver = 0;
 $(document).ready(function() {
@@ -128,6 +126,10 @@ $(document).ready(function() {
           $('.winner').text(players[playerTurnIndex].name + " is the winner");
           $('.winner').show();
           gameOver = 1;
+        } else if (isTied()) {
+          gameOver = 1;
+          $('.winner').text("There is no winner. Click the Reset button to play again.");
+          $('.winner').show();
         } else {
           switchTurn();
           $('.pTurn').text(players[playerTurnIndex].name + " - " + players[playerTurnIndex].symbol)
