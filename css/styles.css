@@ -14,3 +14,21 @@ div.col-md-4 {
 h1 {
   text-align: center;
 }
+
+.winner {
+  border: solid black 1px;
+  text-align: center;
+  display: none;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+#reset {
+  margin-top: 2%;
+  font-size: 30px;
+}
+
+.resetButton {
+  padding-left: 40%;
+
+}

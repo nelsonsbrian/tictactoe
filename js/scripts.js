@@ -1,23 +1,77 @@
+var game = [];
+var board = [];
 var playerTurnIndex = 0;
 var players = [];
-var board = ['0','1','2','3','4','5','6','7','8',];
-var game = ['-','-','-','-','-','-','-','-','-',];
+
+var gameSetup = function() {
+  players = [];
+  var newPlayer = new Player("Player 1", 'X', true);
+  players.push(newPlayer);
+  var newPlayer = new Player("Player 2", 'O', false);
+  players.push(newPlayer);
+  $('.pTurn').text(players[playerTurnIndex].name + " - " + players[playerTurnIndex].symbol)
+  board = ['0','1','2','3','4','5','6','7','8'];
+  game = ['Z','Z','Z','Z','Z','Z','Z','Z','Z'];
+  playerTurnIndex = 0;
+  // for(i=0;i<8;i++) {
+    $('.tSquare').text('');
+}
+
 var winningArrs = [
-  ['M','M','M','-','-','-','-','-','-',],
-  ['-','-','-','M','M','M','-','-','-',],
-  ['-','-','-','-','-','-','M','M','M',],
-  ['M','-','-','M','-','-','M','-','-',],
-  ['-','M','-','-','M','-','-','M','-',],
-  ['-','-','M','-','-','M','-','-','M',],
-  ['M','-','-','-','M','-','-','M','-',],
-  ['-','-','M','-','M','-','M','-','-',],
+  ['M','M','M','-','-','-','-','-','-'],
+  ['-','-','-','M','M','M','-','-','-'],
+  ['-','-','-','-','-','-','M','M','M'],
+  ['M','-','-','M','-','-','M','-','-'],
+  ['-','M','-','-','M','-','-','M','-'],
+  ['-','-','M','-','-','M','-','-','M'],
+  ['M','-','-','-','M','-','-','-','M'],
+  ['-','-','M','-','M','-','M','-','-']
 ];
+
+var test = ['-','M','-','-','M','-','-','-','M'];
+
+var otherWin = [
+  ['0','1','2'],
+  ['3','4','5'],
+  ['6','7','8'],
+  ['0','3','6'],
+  ['1','4','7'],
+  ['2','5','8'],
+  ['0','4','8'],
+  ['2','4','6']
+];
+
+
+//Returns all the string of indexes of the players moves
+var findWin = function() {
+  if (playerTurnIndex === 0) {
+    var turns = (players[playerTurnIndex].grid.join('').match(/x/gi)||[]).length;
+  } else {
+    var turns = (players[playerTurnIndex].grid.join('').match(/o/gi)||[]).length;
+  }
+  var index = 0;
+  var output = '';
+  for(i = 0;i<turns;i++) {
+    index = players[playerTurnIndex].grid.join('').indexOf(players[playerTurnIndex].symbol,index);
+    output += index;
+    index ++;
+  }
+  playerArr = output.split('');
+  for(i=0;i<otherWin.length;i++) {
+    if (playerArr.includes(otherWin[i][0]) && playerArr.includes(otherWin[i][1]) && playerArr.includes(otherWin[i][2])) {
+      console.log("winner:" + i);
+      return true;
+    }
+  }
+}
+
+
 
 var Player = function (name, symbol, turn) {
   this.name = name;
   this.symbol = symbol;
   this.turn = turn;
-  this.grid = ['-','-','-','-','-','-','-','-','-','-'];
+  this.grid = ['-','-','-','-','-','-','-','-','-'];
 }
 
 var checkWin = function () {
@@ -30,12 +84,13 @@ var checkWin = function () {
   }
 }
 
-var winningArrs = function () {
-
-  for(i=0;i<winningArrs.length-1;i++) {
-
-  }
+var resetGame = function() {
+  gameOver = 0
+  players = [];
+  gameSetup();
+  $('.winner').hide();
 }
+
 
 var switchTurn = function() {
   if (players[playerTurnIndex].turn = true) {
@@ -51,26 +106,40 @@ var switchTurn = function() {
   }
 }
 
+// var gameSetup = function() {
+//   var newPlayer = new Player("Player 1", 'X', true);
+//   players.push(newPlayer);
+//   var newPlayer = new Player("Player 2", 'O', false);
+//   players.push(newPlayer);
+//   $('.pTurn').text(players[playerTurnIndex].name + " - " + players[playerTurnIndex].symbol)
+//
+// }
+
+var gameOver = 0;
 $(document).ready(function() {
-  var player1 = $('#player1').val();
-  var player2 = $('#player2').val();
-
-  var newPlayer = new Player("Player 1", 'X', true);
-  players.push(newPlayer);
-  var newPlayer = new Player("Player 2", 'O', false);
-  players.push(newPlayer);
-
-  $('.pTurn').text(players[playerTurnIndex].name + " - " + players[playerTurnIndex].symbol)
+  gameSetup();
   $('.tSquare').click(function() {
-    $(this).text(players[playerTurnIndex].symbol);
-    game[parseInt($(this).attr('id'))] = "M";
-    players[playerTurnIndex].grid[parseInt($(this).attr('id'))] = players[playerTurnIndex].symbol;
-    if (checkWin()) {
-      $('.winner').text(players[playerTurnIndex].name + " is the winner");
+    if (gameOver === 0) {
+      if (game[parseInt($(this).attr('id'))] === "Z") {
+        $(this).text(players[playerTurnIndex].symbol);
+        game[parseInt($(this).attr('id'))] = players[playerTurnIndex].symbol;
+        players[playerTurnIndex].grid[parseInt($(this).attr('id'))] = players[playerTurnIndex].symbol;
+        if (findWin()) {
+          $('.winner').text(players[playerTurnIndex].name + " is the winner");
+          $('.winner').show();
+          gameOver = 1;
+        } else {
+          switchTurn();
+          $('.pTurn').text(players[playerTurnIndex].name + " - " + players[playerTurnIndex].symbol)
+        }
+      } else {
+        alert("Choose a square that hasn't been taken");
+      }
     } else {
-      switchTurn();
-      $('.pTurn').text(players[playerTurnIndex].name + " - " + players[playerTurnIndex].symbol)
+      alert("Game is over.");
     }
   });
-
+  $('#reset').click(function() {
+    resetGame();
+  });
 });
