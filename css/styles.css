@@ -26,9 +26,13 @@ h1 {
 #reset {
   margin-top: 2%;
   font-size: 30px;
+
 }
 
 .resetButton {
-  padding-left: 40%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
